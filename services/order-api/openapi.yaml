@@ -1,11 +1,9 @@
 openapi: 3.0.3
-info: { title: 订单服务, version: 2.1.0, description: 订单域接口。支持多标签分组。 }
+info: { title: 订单服务, version: 2.2.0, description: 订单域接口。含 JSON/表单双形态样本。 }
 servers:
   - url: https://jsonplaceholder.typicode.com
-    description: 公共假数据
 tags:
   - name: 订单
-    description: 订单读写
   - name: 结算
 paths:
   /posts:
@@ -24,7 +22,7 @@ paths:
                 items: { $ref: "#/components/schemas/Order" }
     post:
       tags: [订单]
-      summary: 创建订单
+      summary: 创建订单(JSON)
       requestBody:
         required: true
         content:
@@ -32,6 +30,28 @@ paths:
             schema: { $ref: "#/components/schemas/OrderInput" }
       responses:
         "201": { description: created }
+  /users:
+    post:
+      tags: [结算]
+      summary: 登录(表单演示)
+      description: 以 x-www-form-urlencoded 提交;演示"表单"Body 预填。
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username: { type: string, example: ling }
+                password: { type: string, example: secret123 }
+                remember: { type: boolean, default: true }
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema: { type: object }
   /posts/{id}/comments:
     get:
       tags: [结算]

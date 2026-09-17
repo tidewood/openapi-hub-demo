@@ -1,0 +1,38 @@
+openapi: 3.0.3
+info:
+  title: 工具箱(真实外网)
+  version: 1.0.0
+  description: |
+    server 指向 httpbin.org(公网真实可用):
+    - "delay/{n}" 验证调试面板的取消与耗时;
+    - "image/png" 返回随机 PNG,验证图像响应预览与下载。
+servers:
+  - url: https://httpbin.org
+tags:
+  - name: 调试工具
+paths:
+  /delay/{seconds}:
+    get:
+      tags: [调试工具]
+      summary: 延迟响应(取消演示)
+      parameters:
+        - name: seconds
+          in: path
+          required: true
+          schema: { type: integer, minimum: 1, maximum: 10, default: 5 }
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema: { type: object }
+  /image/png:
+    get:
+      tags: [调试工具]
+      summary: 随机 PNG(图像预览)
+      responses:
+        "200":
+          description: 随机图像
+          content:
+            image/png:
+              schema: { type: string, format: binary }

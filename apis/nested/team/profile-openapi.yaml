@@ -1,0 +1,17 @@
+openapi: 3.1.0
+info: { title: 资料服务, version: 0.3.0, description: 深层目录中的服务(auto/glob 才能发现) }
+servers:
+  - url: https://jsonplaceholder.typicode.com
+paths:
+  /users/{id}:
+    get:
+      tags: [资料]
+      summary: 公共资料
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: integer } }
+      responses:
+        "200":
+          description: profile
+          content:
+            application/json:
+              schema: { type: object }

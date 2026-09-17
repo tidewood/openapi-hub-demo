@@ -1,0 +1,4 @@
+# 故意的坏文件:无 openapi 声明(测试跳过逻辑)
+swagger: "2.0"
+info: { title: legacy, version: "1.0" }
+paths: {}

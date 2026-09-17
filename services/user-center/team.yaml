@@ -1,0 +1,15 @@
+openapi: 3.0.3
+info: { title: team-fragment, version: 0.0.1 }
+components:
+  schemas:
+    Team:
+      type: object
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        lead: { $ref: "#/components/schemas/TeamMember" }
+    TeamMember:
+      type: object
+      properties:
+        uid: { type: integer }
+        team: { $ref: "#/components/schemas/Team" }
